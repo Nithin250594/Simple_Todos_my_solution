@@ -1,0 +1,33 @@
+/* Write your CSS here */
+.simpletodos-bg {
+  background-color: #ffc2a0;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.simpletodos-container {
+  width: 95vw;
+  background-color: #ffffff;
+  background-size: cover;
+  border-radius: 15px;
+  margin-top: 20vh;
+  margin-bottom: 20vh;
+  text-align: center;
+}
+
+.todos-title {
+  font-size: 32px;
+  font-family: 'Roboto';
+  font-weight: 600;
+  color: #ff8542;
+  padding: 25px;
+}
+
+.unordered-list {
+  list-style-type: none;
+  padding-left: 0px;
+}
