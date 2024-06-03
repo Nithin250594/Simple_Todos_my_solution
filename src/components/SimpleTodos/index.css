@@ -2,11 +2,12 @@
 .simpletodos-bg {
   background-color: #ffc2a0;
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow-y: auto;
 }
 
 .simpletodos-container {
@@ -14,8 +15,8 @@
   background-color: #ffffff;
   background-size: cover;
   border-radius: 15px;
-  margin-top: 20vh;
-  margin-bottom: 20vh;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
   text-align: center;
 }
 
@@ -30,4 +31,29 @@
 .unordered-list {
   list-style-type: none;
   padding-left: 0px;
+}
+
+.add-todo-input {
+  height: 30px;
+  width: 30%;
+  border: 1px solid grey;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.add-todo-input:focus {
+  outline: none;
+}
+
+.add-button {
+  background-color: #ff8542;
+  color: white;
+  height: 30px;
+  width: 50px;
+  border: none;
+  border-radius: 3px;
+  margin-left: 30px;
+  font-weight: 500;
+  font-family: 'Roboto';
+  cursor: pointer;
 }

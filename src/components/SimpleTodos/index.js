@@ -42,7 +42,7 @@ const initialTodosList = [
 // Write your code here
 
 class SimpleTodos extends Component {
-  state = {todosList: initialTodosList}
+  state = {todosList: initialTodosList, todoInput: ''}
 
   deleteItem = uniqueId => {
     const {todosList} = this.state
@@ -52,13 +52,59 @@ class SimpleTodos extends Component {
     this.setState({todosList: filteredTodosList})
   }
 
+  onChangeTodo = event => {
+    this.setState({todoInput: event.target.value})
+  }
+
+  onAddTodo = () => {
+    const {todosList, todoInput} = this.state
+    const inputArray = todoInput.split(' ')
+    const lastInputValue = inputArray[inputArray.length - 1]
+    const checkCount = Number.isInteger(Number(lastInputValue))
+
+    if (checkCount) {
+      const newTodos = []
+      inputArray.pop()
+      for (
+        let i = todosList.length + 1;
+        i <= todosList.length + Number(lastInputValue);
+        i += 1
+      ) {
+        const newId = i
+        const modifiedInputTodo = inputArray.join(' ')
+        const newTodo = {id: newId, title: modifiedInputTodo}
+        newTodos.push(newTodo)
+      }
+      console.log(newTodos)
+      this.setState(prevState => ({
+        todosList: [...prevState.todosList, ...newTodos],
+      }))
+    } else {
+      const newId = todosList.length + 1
+      const newTodo = {id: newId, title: todoInput}
+      this.setState(prevState => ({
+        todosList: [...prevState.todosList, newTodo],
+      }))
+    }
+  }
+
   render() {
-    const {todosList} = this.state
+    const {todosList, todoInput} = this.state
 
     return (
       <div className="simpletodos-bg">
         <div className="simpletodos-container">
           <h1 className="todos-title">Simple Todos</h1>
+          <input
+            className="add-todo-input"
+            type="text"
+            placeholder="Add Todo"
+            onChange={this.onChangeTodo}
+            value={todoInput}
+          />
+          <button className="add-button" type="button" onClick={this.onAddTodo}>
+            Add
+          </button>
           <ul className="unordered-list">
             {todosList.map(eachTodo => (
               <TodoItem
