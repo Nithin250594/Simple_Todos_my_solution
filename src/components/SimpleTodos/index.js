@@ -52,6 +52,22 @@ class SimpleTodos extends Component {
     this.setState({todosList: filteredTodosList})
   }
 
+  editTodoItem = (uniqueId, todoItemInput) => {
+    const {todosList} = this.state
+    const isTodoItemExist = todosList.find(eachTodo => eachTodo.id === uniqueId)
+
+    if (isTodoItemExist) {
+      this.setState(prevState => ({
+        todosList: prevState.todosList.map(eachTodo => {
+          if (eachTodo.id === uniqueId) {
+            return {...eachTodo, title: todoItemInput}
+          }
+          return eachTodo
+        }),
+      }))
+    }
+  }
+
   onChangeTodo = event => {
     this.setState({todoInput: event.target.value})
   }
@@ -112,6 +128,7 @@ class SimpleTodos extends Component {
                 key={eachTodo.id}
                 uniqueId={eachTodo.id}
                 deleteItem={this.deleteItem}
+                editTodoItem={this.editTodoItem}
               />
             ))}
           </ul>

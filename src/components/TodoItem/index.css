@@ -8,7 +8,15 @@
 
 .each-todo-section {
   display: flex;
-  margin-left: 10vw;
+  margin-left: 15vw;
+}
+
+.todo-title-edit {
+  width: 30vw;
+  border: none;
+  height: 30px;
+  font-size: 18px;
+  font-weight: 400;
 }
 
 .todoItem-title {
@@ -36,7 +44,7 @@
   padding-top: 5px;
   padding-bottom: 5px;
   font-weight: 600;
-  margin-right: 30vw;
+  margin-right: 15vw;
   cursor: pointer;
   outline: none;
 }

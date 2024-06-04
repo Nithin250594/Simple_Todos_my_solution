@@ -2,7 +2,16 @@ import {Component} from 'react'
 import './index.css'
 
 class TodoItem extends Component {
-  state = {isEdit: true, isTodoChecked: false}
+  state = {
+    isEdit: true,
+    isTodoChecked: false,
+    todoItemInput: '',
+  }
+
+  componentDidMount() {
+    const {todoItem} = this.props
+    this.setState({todoItemInput: todoItem})
+  }
 
   onClickEdit = () => {
     this.setState(prevState => ({isEdit: !prevState.isEdit}))
@@ -12,12 +21,20 @@ class TodoItem extends Component {
     this.setState(prevState => ({isTodoChecked: !prevState.isTodoChecked}))
   }
 
+  onChangeInputEdit = event => {
+    this.setState({todoItemInput: event.target.value})
+  }
+
   render() {
-    const {isEdit, isTodoChecked} = this.state
-    const {todoItem, uniqueId, deleteItem} = this.props
+    const {isEdit, isTodoChecked, todoItemInput} = this.state
+    const {todoItem, uniqueId, deleteItem, editTodoItem} = this.props
 
     const onDelete = () => {
       deleteItem(uniqueId)
+    }
+
+    const onClickSave = () => {
+      editTodoItem(uniqueId, todoItemInput)
     }
 
     const editOrSaveButton = isEdit ? 'Edit' : 'Save'
@@ -28,14 +45,26 @@ class TodoItem extends Component {
       <li className="todo-Items-list" key={uniqueId}>
         <div className="each-todo-section">
           <input type="checkbox" onChange={this.onChangeChecked} />
-          <p className={`todoItem-title ${todoTitleStyle}`}>{todoItem}</p>
+          {isEdit ? (
+            <p className={`todoItem-title ${todoTitleStyle}`}>{todoItem}</p>
+          ) : (
+            <input
+              type="text"
+              className="todo-title-edit"
+              value={todoItemInput}
+              onChange={this.onChangeInputEdit}
+            />
+          )}
         </div>
 
         <div>
           <button
             className={`edit-save-button ${saveButtonStyle}`}
             type="button"
-            onClick={this.onClickEdit}
+            onClick={() => {
+              this.onClickEdit()
+              onClickSave()
+            }}
           >
             {editOrSaveButton}
           </button>
